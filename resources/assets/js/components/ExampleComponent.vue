@@ -6,7 +6,7 @@
                     <div class="panel-heading">Example Component</div>
 
                     <div class="panel-body">
-                        Hola a todos!
+                        Hola a todos :D!
                     </div>
                 </div>
             </div>
