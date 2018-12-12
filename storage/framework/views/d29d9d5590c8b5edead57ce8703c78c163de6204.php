@@ -18,7 +18,7 @@
     </div>
 
     <div class="col-md-6 text-right m-t-20">
-        <a href="/panel/vehiculos/gastos" class="btn btn-dark"><i class="fa fa-bolt"></i> Incidentes</a>
+        <a href="/panel/vehiculos/incidentes" class="btn btn-dark"><i class="fa fa-bolt"></i> Incidentes</a>
     </div>
 <?php $__env->stopSection(); ?>
 

@@ -41,41 +41,38 @@
         <div class="panel panel-default">            
             <div class="panel-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="informacion-tab" data-toggle="tab" href="#informacion" role="tab" aria-controls="informacion" aria-selected="true">Información</a>
+                    <li class="active">
+                        <a data-toggle="tab" href="#informacion">Información</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="combustible-tab" data-toggle="tab" href="#combustible" role="tab" aria-controls="combustible" aria-selected="false">Combustible</a>
+                        <a data-toggle="tab" href="#combustible">Combustible</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="mantenimiento-tab" data-toggle="tab" href="#mantenimiento" role="tab" aria-controls="mantenimientos" aria-selected="false">Mantenimientos</a>
+                        <a data-toggle="tab" href="#mantenimiento">Mantenimientos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="incidente-tab" data-toggle="tab" href="#incidente" role="tab" aria-controls="incidentes" aria-selected="false">Incidentes</a>
+                        <a data-toggle="tab" href="#incidente">Incidentes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="recordatorio-tab" data-toggle="tab" href="#recordatorio" role="tab" aria-controls="recordatorios" aria-selected="false">Recordatorios</a>
+                        <a data-toggle="tab" href="#recordatorio">Recordatorios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="actividad-tab" data-toggle="tab" href="#actividad" role="tab" aria-controls="actividades" aria-selected="false">Actividades</a>
+                        <a data-toggle="tab" href="#actividad">Actividades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="operador-tab" data-toggle="tab" href="#operador" role="tab" aria-controls="operadores" aria-selected="false">Operadores</a>
+                        <a data-toggle="tab" href="#operador">Operadores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="status-tab" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">Status</a>
+                        <a data-toggle="tab" href="#documento">Documentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="documento-tab" data-toggle="tab" href="#documento" role="tab" aria-controls="documentos" aria-selected="false">Documentos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="fotografia-tab" data-toggle="tab" href="#fotografia" role="tab" aria-controls="fotografias" aria-selected="false">Fotografías</a>
+                        <a data-toggle="tab" href="#fotografia">Fotografías</a>
                     </li>
                 </ul>
     
                 <div class="tab-content" id="myTabContent">
                     <!-- CONTENIDO DE INFORMACION -->
-                    <div class="tab-pane fade show active" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
+                    <div class="tab-pane fade in active" id="informacion">
                         <div class="row padding-20">
                             <div class="col-md-12">
                                 <div class="panel panel-success">
@@ -251,38 +248,38 @@
                                             <tbody>
                                                 <tr>
                                                     <td><small><strong>Fecha Inicial</strong></small></td>
-                                                    <td><?php echo e((($objCredito->fecha_inicial)?$objCredito->fecha_inicial:'No registrado')); ?>
+                                                    <td><?php echo e((($objCredito->fecha_inicial != null)?$objCredito->fecha_inicial:'No registrado')); ?>
 
                                                 </tr>
                                                 <tr>
                                                     <td><small><strong>Fecha Final</strong></small></td>
-                                                    <td><?php echo e((($objCredito->fecha_final)?$objCredito->fecha_final:'No registrado')); ?>
+                                                    <td><?php echo e((($objCredito->fecha_final != null)?$objCredito->fecha_final:'No registrado')); ?>
 
                                                 </tr>
                                                 <tr>
                                                     <td><small><strong>Pago Mensual</strong></small></td>
-                                                    <td><?php echo e((($objCredito->pago_mensual)?$objCredito->pago_mensual:'No registrado')); ?>
+                                                    <td><?php echo e((($objCredito->pago_mensual != null)?$objCredito->pago_mensual:'No registrado')); ?>
 
                                                 </tr>
                                                 <tr>
                                                     <td><small><strong>Monto Financiado</strong></small></td>
-                                                    <td><?php echo e((($objCredito->monto_financiado)?$objCredito->monto_financiado:'No registrado')); ?></td>
+                                                    <td><?php echo e((($objCredito->monto_financiado != null)?$objCredito->monto_financiado:'No registrado')); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td><small><strong>Tasa de Inter&eacute;s</strong></small></td>
-                                                    <td><?php echo e((($objCredito->tasa_interes)?$objCredito->tasa_interes:'No registrado')); ?></td>
+                                                    <td><?php echo e((($objCredito->tasa_interes != null)?$objCredito->tasa_interes:'No registrado')); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td><small><strong>Valor Residual</strong></small></td>
-                                                    <td><?php echo e((($objCredito->valor_residual)?$objCredito->valor_residual:'No registrado')); ?></td>
+                                                    <td><?php echo e((($objCredito->valor_residual != null)?$objCredito->valor_residual:'No registrado')); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td><small><strong>Instituci&oacute;n Financiera</strong></small></td>
-                                                    <td><?php echo e((($objCredito->institucion_financiera)?$objCredito->institucion_financiera:'No registrado')); ?></td>
+                                                    <td><?php echo e((($objCredito->institucion_financiera != null)?$objCredito->institucion_financiera:'No registrado')); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td><small><strong>No. de Cuenta</strong></small></td>
-                                                    <td><?php echo e((($objCredito->numero_cuenta)?$objCredito->numero_cuenta:'No registrado')); ?></td>
+                                                    <td><?php echo e((($objCredito->numero_cuenta != null)?$objCredito->numero_cuenta:'No registrado')); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td><small><strong>Notas</strong></small></td>
@@ -298,7 +295,7 @@
                     <!-- FIN CONTENIDO INFORMACION -->
     
                     <!-- CONTENIDO DE INCIDENTES -->
-                    <div class="tab-pane fade" id="incidente" role="tabpanel" aria-labelledby="incidente-tab">
+                    <div class="tab-pane fade" id="incidente">
                         <div class="panel panel-default padding-20">
                             <div class="panel-heading">
                                 <h4>INCIDENTES REPORTADOS</h4>
@@ -399,6 +396,77 @@
                     </div>
                     <!-- FIN CONTENIDO INCIDENTES -->
 
+                    <!-- CONTENIDO DE DOCUMENTOS -->
+                    <div class="tab-pane fade" id="documento">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="panel panel-default padding-20">
+                                    <div class="panel-heading">
+                                        <h4>DOCUMENTOS</h4>
+                                    </div>
+                        
+                                    <div class="panel-body">                                
+                                        <div class="responsive-table">
+                                            <table id="dtDocumentos" class="table table-striped" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-left"></th>
+                                                        <th class="text-left">Nombre</th>
+                                                        <th class="text-left">Descripci&oacute;n</th>
+                                                        <th class="text-center">Acci&oacute;nes</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $__currentLoopData = $lstDocumentos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <tr>
+                                                            <td class="text-left"><i class="fa fa-file-text"></i></td>
+                                                            <td class="text-left">
+                                                                <a href="#"></a>
+                                                            </td>
+                                                            <td class="text-left"></td>
+                                                            <td class="text-center">
+                                                                <div class="btn-group" role="group">
+                                                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <span class="fa fa-cog"></span>
+                                                                        <span class="fa fa-angle-down"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="#"><i class="fa fa-trash"></i> Eliminar</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th class="text-left"></th>
+                                                        <th class="text-left">Nombre</th>
+                                                        <th class="text-left">Descripci&oacute;n</th>
+                                                        <th class="text-center">Acci&oacute;nes</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="panel panel-primary padding-20">
+                                    <div class="panel-heading">
+                                        <h4 class="text-white">CARGAR DOCUMENTOS</h4>
+                                    </div>
+
+                                    <div class="panel-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIN CONTENIDO DOCUMENTOS -->
+
                 </div>                
             </div>
         </div>
@@ -411,6 +479,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#dtIncidentes').DataTable();
+        $('#dtDocumentos').DataTable();
         $('.ttip').tooltip();
     });
 </script>

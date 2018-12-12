@@ -83,6 +83,10 @@ class Messages {
 	//VEHICULOS COMPRA
 	const VEHICULOS_COMPRA_EDIT_TITLE = "Compra modificada.";
 	const VEHICULOS_COMPRA_EDIT_MESSAGE = "Los datos de compra del vehículo se modificaron exitosamente.";
+
+	//VEHICULOS CREDITO
+	const VEHICULOS_CREDITO_EDIT_TITLE = "Crédito modificado.";
+	const VEHICULOS_CREDITO_EDIT_MESSAGE = "Los datos de crédito del vehículo se modificaron exitosamente.";
 }
 
 ?>

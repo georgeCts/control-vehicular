@@ -46,10 +46,6 @@ export default {
             badgeClass: 'badges-v1',
             paddingClass: 'padding-15',
         }
-    },
-
-    mounted() {
-        console.log(user);
     }
 }
 </script>

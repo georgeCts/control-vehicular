@@ -17,6 +17,7 @@ use App\VehiculosMedidasCombustible;
 use App\VehiculosGrupos;
 use App\VehiculosInfCompra;
 use App\VehiculosInfCredito;
+use App\VehiculosDocumentos;
 use App\UsuariosBitacoras;
 use App\Incidentes;
 use App\Proveedores;
@@ -199,13 +200,15 @@ class VehiculosController extends Controller
 
         if($objVehiculo != null) {
             $objCompra      = VehiculosInfCompra::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->first();
-            $objCredito     = VehiculosInfCompra::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->first();
+            $objCredito     = VehiculosInfCredito::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->first();
             $lstIncidentes  = Incidentes::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->orderBy('pk_incidente', 'DESC')->get();
+            $lstDocumentos  = VehiculosDocumentos::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->orderBy('pk_vehiculo_documento', 'DESC')->get();
 
             $return = View('contents.vehiculos.perfil.Index', [ 'objVehiculo'      => $objVehiculo,
                                                                 'objCompra'        => $objCompra,
                                                                 'objCredito'       => $objCredito,
-                                                                'lstIncidentes'    => $lstIncidentes]);
+                                                                'lstIncidentes'    => $lstIncidentes,
+                                                                'lstDocumentos'    => $lstDocumentos]);
         }
 
         return $return;
@@ -283,30 +286,33 @@ class VehiculosController extends Controller
 
         if($objCredito != null) {
             if($request['txtFechaInicial'] != "" && $request['txtFechaFinal'] != "") {
-                $objCompra->compra_fecha = FormatValidation::getDateAtom($request['txtFechaCompra']);
-                $objCompra->compra_fecha = FormatValidation::getDateAtom($request['txtFechaCompra']);
+                $objCredito->fecha_inicial = FormatValidation::getDateAtom($request['txtFechaInicial']);
+                $objCredito->fecha_final = FormatValidation::getDateAtom($request['txtFechaFinal']);
             }
 
-            $objCompra->compra_precio               = FormatValidation::getDecimal($request['txtPrecioCompra']);
-            $objCompra->compra_odometro             = FormatValidation::getDecimal($request['txtOdometroCompra']);
-            $objCompra->garantia_limite_odometro    = FormatValidation::getDecimal($request['txtOdometroGarantia']);
-            $objCompra->notas                       = FormatValidation::getValidString($request['txtNotas']);
+            $objCredito->pago_mensual            = FormatValidation::getDecimal($request['txtPagoMensual']);
+            $objCredito->monto_financiado        = FormatValidation::getDecimal($request['txtMontoFinanciado']);
+            $objCredito->tasa_interes            = FormatValidation::getDecimal($request['txtTasaInteres']);
+            $objCredito->valor_residual          = FormatValidation::getDecimal($request['txtValorResidual']);
+            $objCredito->institucion_financiera  = FormatValidation::getValidString($request['txtInstitucion']);
+            $objCredito->numero_cuenta           = FormatValidation::getValidString($request['txtNumeroCuenta']);
+            $objCredito->notas                   = FormatValidation::getValidString($request['txtNotas']);
 
             try {
-                if($objCompra->update()) {
+                if($objCredito->update()) {
                     $objBitacora = new UsuariosBitacoras();
-                    $objBitacora->descripcion   = "Modificó los datos de compra del vehículo con ID: ".$objCompra->pk_vehiculo." / Nombre: ".$objCompra->vehiculo->vehiculo_nombre;
+                    $objBitacora->descripcion   = "Modificó los datos de crédito del vehículo con ID: ".$objCredito->pk_vehiculo." / Nombre: ".$objCredito->vehiculo->vehiculo_nombre;
                     $objBitacora->create();
 
-                    $objReturn->setResult(true, Messages::VEHICULOS_COMPRA_EDIT_TITLE, Messages::VEHICULOS_COMPRA_EDIT_MESSAGE);
+                    $objReturn->setResult(true, Messages::VEHICULOS_CREDITO_EDIT_TITLE, Messages::VEHICULOS_CREDITO_EDIT_MESSAGE);
                 } else {
-                    $objReturn->setResult(false, Errors::VEHICULOS_COMPRA_EDIT_01_TITLE, Errors::VEHICULOS_COMPRA_EDIT_01_MESSAGE);
+                    $objReturn->setResult(false, Errors::VEHICULOS_CREDITO_EDIT_01_TITLE, Errors::VEHICULOS_CREDITO_EDIT_01_MESSAGE);
                 }
             } catch(Exception $exception) {
                 $objReturn->setResult(false, Errors::getErrors($exception->getCode())['title'], Errors::getErrors($exception->getCode())['message']);
             }
         } else {
-            $objReturn->setResult(false, Errors::VEHICULOS_COMPRA_EDIT_01_TITLE, Errors::VEHICULOS_COMPRA_EDIT_01_MESSAGE);
+            $objReturn->setResult(false, Errors::VEHICULOS_CREDITO_EDIT_01_TITLE, Errors::VEHICULOS_CREDITO_EDIT_01_MESSAGE);
         }
 
         return $objReturn->getRedirectPath();

@@ -63,6 +63,8 @@ return array(
     'App\\UsuariosTipos' => $baseDir . '/app/UsuariosTipos.php',
     'App\\Vehiculos' => $baseDir . '/app/Vehiculos.php',
     'App\\VehiculosGrupos' => $baseDir . '/app/VehiculosGrupos.php',
+    'App\\VehiculosInfCompra' => $baseDir . '/app/VehiculosInfCompra.php',
+    'App\\VehiculosInfCredito' => $baseDir . '/app/VehiculosInfCredito.php',
     'App\\VehiculosInspecciones' => $baseDir . '/app/VehiculosInspecciones.php',
     'App\\VehiculosInspeccionesFicheros' => $baseDir . '/app/VehiculosInspeccionesFicheros.php',
     'App\\VehiculosMedidasCombustible' => $baseDir . '/app/VehiculosMedidasCombustible.php',

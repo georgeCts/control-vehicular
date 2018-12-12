@@ -252,6 +252,15 @@ class Errors {
 	const VEHICULOS_COMPRA_EDIT_02_ID = "5_0007";
 	const VEHICULOS_COMPRA_EDIT_02_TITLE = "Error de modificación.";
 	const VEHICULOS_COMPRA_EDIT_02_MESSAGE = "Los datos de compra del vehículo no pudieron modificarse. Verifique la información.";
+
+	//VEHICULOS CREDITO
+	const VEHICULOS_CREDITO_EDIT_01_ID = "5_0006";
+	const VEHICULOS_CREDITO_EDIT_01_TITLE = "Error de modificación.";
+	const VEHICULOS_CREDITO_EDIT_01_MESSAGE = "No se pudo encontrar el registro de crédito. Verifique la información.";
+
+	const VEHICULOS_CREDITO_EDIT_02_ID = "5_0007";
+	const VEHICULOS_CREDITO_EDIT_02_TITLE = "Error de modificación.";
+	const VEHICULOS_CREDITO_EDIT_02_MESSAGE = "Los datos de crédito del vehículo no pudieron modificarse. Verifique la información.";
 	
 }
 
