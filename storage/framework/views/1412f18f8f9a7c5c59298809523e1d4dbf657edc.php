@@ -418,12 +418,12 @@
                                                 </thead>
                                                 <tbody>
                                                     <?php $__currentLoopData = $lstDocumentos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <tr>
+                                                        <tr class="item-documento-<?php echo e($item->pk_vehiculo_documento); ?>">
                                                             <td class="text-left"><i class="fa fa-file-text"></i></td>
                                                             <td class="text-left">
-                                                                <a href="#"></a>
+                                                                <a target="_blank" href="<?php echo e(Storage::disk('s3')->url($item->url_documento)); ?>"><?php echo e($item->titulo); ?></a>
                                                             </td>
-                                                            <td class="text-left"></td>
+                                                            <td class="text-left"><?php echo e($item->descripcion); ?></td>
                                                             <td class="text-center">
                                                                 <div class="btn-group" role="group">
                                                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -431,7 +431,7 @@
                                                                         <span class="fa fa-angle-down"></span>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
-                                                                        <li><a href="#"><i class="fa fa-trash"></i> Eliminar</a></li>
+                                                                        <li><a href="#" onclick="borrarDocVeh(<?php echo e($item->pk_vehiculo_documento); ?>, '<?php echo e(csrf_token()); ?>')"><i class="fa fa-trash"></i> Eliminar</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </td>
@@ -459,7 +459,26 @@
                                     </div>
 
                                     <div class="panel-body">
+                                        <form id="vehiculoDocumentoForm">
+                                            <div class="row form-group">
+                                                <div id="load-doc-msg"></div>
+                                            </div>
 
+                                            <div class="form-group">
+                                                <input type="text" name="txtTitulo" id="txtTitulo" class="form-control" placeholder="Nombre" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" placeholder="Descripción"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="file" name="file" id="file" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-danger" onclick="subirDocVeh(<?php echo e($objVehiculo->pk_vehiculo); ?>, '<?php echo e(csrf_token()); ?>')"> Subir Documento</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

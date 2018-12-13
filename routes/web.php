@@ -52,11 +52,20 @@ Route::group([  'prefix'    => 'panel',
     Route::get('/vehiculos/editar/{pkVehiculo}', 'VehiculosController@editar');
     Route::put('/vehiculos/modificar', ['as' => 'update-vehiculo', 'uses' => 'VehiculosController@update']);
 
+    //PERFIL DE VEHICULOS
     Route::get('/vehiculos/perfil_veh/{pkVehiculo}', 'VehiculosController@perfil');
+
+    //DATOS DE COMPRA DE VEHICULO
     Route::get('/vehiculos/dat_compra/{pkVehiculo}', 'VehiculosController@compra');
     Route::put('/vehiculos/dat_compra', ['as' => 'update-vehiculo-compra', 'uses' => 'VehiculosController@updateCompra']);
+
+    //DATOS DE CREDITO DE VEHICULO
     Route::get('/vehiculos/dat_credito/{pkVehiculo}', 'VehiculosController@credito');
     Route::put('/vehiculos/dat_credito', ['as' => 'update-vehiculo-credito', 'uses' => 'VehiculosController@updateCredito']);
+
+    //DOCUMENTOS DE VEHICULO
+    Route::post('/vehiculos/subir_doc_veh', 'VehiculosController@uploadDocumento');
+    Route::get('/vehiculos/borrar_doc_veh/{pkVehiculoDocumento}', 'VehiculosController@deleteDocumento');
 
     //TIPOS DE VEHICULOS
     Route::get('/vehiculos/tipos', 'VehiculosTiposController@index');

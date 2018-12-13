@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 use App\Library\Messages;
 use App\Library\Errors;
 use App\Library\FormatValidation;
@@ -316,5 +318,58 @@ class VehiculosController extends Controller
         }
 
         return $objReturn->getRedirectPath();
+    }
+
+    public function uploadDocumento(Request $request) {
+
+        $return = ['response' => false];
+        
+        if($request->file('file')) {
+            $objDocumento = new VehiculosDocumentos();
+
+            //CARGA DEL DOCUMENTO DEL GASTO ADICIONAL
+            $storage = Storage::disk('s3');
+            $path = $storage->put('ficheros', $request->file('file'), 'public');
+
+            $objDocumento->url_documento    = $path;
+            $objDocumento->pk_vehiculo      = $request['pkVehiculo'];
+            $objDocumento->titulo           = $request['txtTitulo'];
+            $objDocumento->descripcion      = $request['txtDescripcion'];
+
+            try {
+                if($objDocumento->create()) {
+                    $objBitacora = new UsuariosBitacoras();
+                    $objBitacora->descripcion   = "Cargó un documento relacionado con el vehículo con ID: ".$objDocumento->pk_vehiculo;
+                    $objBitacora->create();
+
+                    $return = ['response' => true, 'pk_vehiculo_documento' => $objDocumento->pk_vehiculo_documento, 'url_documento' => $path, 'titulo' => $objDocumento->titulo, 'descripcion' => $objDocumento->descripcion];
+                }
+            } catch(Exception $exception) {
+                $return = $exception;
+            }
+        }
+
+        return json_encode($return);
+    }
+
+    public function deleteDocumento($pkVehiculoDocumento) {
+        $return = "false";
+        $objDocumento = VehiculosDocumentos::where('pk_vehiculo_documento', $pkVehiculoDocumento)->first();
+
+        if($objDocumento != null) {
+            try {
+                if($objDocumento->delete()) {
+                    $objBitacora = new UsuariosBitacoras();
+                    $objBitacora->descripcion   = "Eliminó un documento relacionado con el vehículo con ID: ".$objDocumento->pk_vehiculo;
+                    $objBitacora->create();
+
+                    $return = "true";
+                }
+            } catch(Exception $exception) {
+                $return = $exception;
+            }
+        }
+
+        return $return;
     }
 }
