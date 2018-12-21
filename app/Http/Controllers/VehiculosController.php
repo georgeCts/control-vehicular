@@ -20,9 +20,11 @@ use App\VehiculosGrupos;
 use App\VehiculosInfCompra;
 use App\VehiculosInfCredito;
 use App\VehiculosDocumentos;
+use App\VehiculosFotografias;
 use App\UsuariosBitacoras;
 use App\Incidentes;
 use App\Proveedores;
+use App\Recordatorios;
 
 class VehiculosController extends Controller
 {
@@ -204,13 +206,17 @@ class VehiculosController extends Controller
             $objCompra      = VehiculosInfCompra::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->first();
             $objCredito     = VehiculosInfCredito::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->first();
             $lstIncidentes  = Incidentes::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->orderBy('pk_incidente', 'DESC')->get();
+            $lstRecordatorios = Recordatorios::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->orderBy('pk_recordatorio', 'DESC')->get();
             $lstDocumentos  = VehiculosDocumentos::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->orderBy('pk_vehiculo_documento', 'DESC')->get();
+            $lstFotografias = VehiculosFotografias::where('eliminado', 0)->where('pk_vehiculo', $objVehiculo->pk_vehiculo)->orderBy('pk_vehiculo_fotografia', 'DESC')->get();
 
             $return = View('contents.vehiculos.perfil.Index', [ 'objVehiculo'      => $objVehiculo,
                                                                 'objCompra'        => $objCompra,
                                                                 'objCredito'       => $objCredito,
                                                                 'lstIncidentes'    => $lstIncidentes,
-                                                                'lstDocumentos'    => $lstDocumentos]);
+                                                                'lstRecordatorios' => $lstRecordatorios,
+                                                                'lstDocumentos'    => $lstDocumentos,
+                                                                'lstFotografias'   => $lstFotografias]);
         }
 
         return $return;
@@ -361,6 +367,59 @@ class VehiculosController extends Controller
                 if($objDocumento->delete()) {
                     $objBitacora = new UsuariosBitacoras();
                     $objBitacora->descripcion   = "Eliminó un documento relacionado con el vehículo con ID: ".$objDocumento->pk_vehiculo;
+                    $objBitacora->create();
+
+                    $return = "true";
+                }
+            } catch(Exception $exception) {
+                $return = $exception;
+            }
+        }
+
+        return $return;
+    }
+
+    public function uploadFotografia(Request $request) {
+
+        $return = ['response' => false];
+        
+        if($request->file('file')) {
+            $objFotografia = new VehiculosFotografias();
+
+            //CARGA DEL DOCUMENTO DEL GASTO ADICIONAL
+            $storage = Storage::disk('s3');
+            $path = $storage->put('ficheros', $request->file('file'), 'public');
+
+            $objFotografia->url_fotografia   = $path;
+            $objFotografia->pk_vehiculo      = $request['pkVehiculo'];
+            $objFotografia->titulo           = $request['txtTitulo'];
+            $objFotografia->descripcion      = $request['txtDescripcion'];
+
+            try {
+                if($objFotografia->create()) {
+                    $objBitacora = new UsuariosBitacoras();
+                    $objBitacora->descripcion   = "Cargó una fotografía relacionada con el vehículo con ID: ".$objFotografia->pk_vehiculo;
+                    $objBitacora->create();
+
+                    $return = ['response' => true, 'pk_vehiculo_fotografia' => $objFotografia->pk_vehiculo_fotografia, 'url_fotografia' => $path, 'titulo' => $objFotografia->titulo, 'descripcion' => $objFotografia->descripcion];
+                }
+            } catch(Exception $exception) {
+                $return = $exception;
+            }
+        }
+
+        return json_encode($return);
+    }
+
+    public function deleteFotografia($pkVehiculoFotografia) {
+        $return = "false";
+        $objFotografia = VehiculosFotografias::where('pk_vehiculo_fotografia', $pkVehiculoFotografia)->first();
+
+        if($objFotografia != null) {
+            try {
+                if($objFotografia->delete()) {
+                    $objBitacora = new UsuariosBitacoras();
+                    $objBitacora->descripcion   = "Eliminó una fotografía relacionada con el vehículo con ID: ".$objFotografia->pk_vehiculo;
                     $objBitacora->create();
 
                     $return = "true";

@@ -461,6 +461,8 @@ class ComposerStaticInit54ea252ab493ea45a3ac63933ca29a67
         'App\\UsuariosPrivilegios' => __DIR__ . '/../..' . '/app/UsuariosPrivilegios.php',
         'App\\UsuariosTipos' => __DIR__ . '/../..' . '/app/UsuariosTipos.php',
         'App\\Vehiculos' => __DIR__ . '/../..' . '/app/Vehiculos.php',
+        'App\\VehiculosDocumentos' => __DIR__ . '/../..' . '/app/VehiculosDocumentos.php',
+        'App\\VehiculosFotografias' => __DIR__ . '/../..' . '/app/VehiculosFotografias.php',
         'App\\VehiculosGrupos' => __DIR__ . '/../..' . '/app/VehiculosGrupos.php',
         'App\\VehiculosInfCompra' => __DIR__ . '/../..' . '/app/VehiculosInfCompra.php',
         'App\\VehiculosInfCredito' => __DIR__ . '/../..' . '/app/VehiculosInfCredito.php',

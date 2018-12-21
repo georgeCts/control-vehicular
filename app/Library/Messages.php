@@ -87,6 +87,12 @@ class Messages {
 	//VEHICULOS CREDITO
 	const VEHICULOS_CREDITO_EDIT_TITLE = "Crédito modificado.";
 	const VEHICULOS_CREDITO_EDIT_MESSAGE = "Los datos de crédito del vehículo se modificaron exitosamente.";
+
+	//RECORDATORIOS
+	const RECORDATORIOS_CREATE_TITLE = "Nuevo recordatorio.";
+	const RECORDATORIOS_CREATE_MESSAGE = "El nuevo recordatorio se creó exitosamente.";
+	const RECORDATORIOS_EDIT_TITLE = "Recordatorio modificado.";
+	const RECORDATORIOS_EDIT_MESSAGE = "El recordatorio se modificó exitosamente.";
 }
 
 ?>

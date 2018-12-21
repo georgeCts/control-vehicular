@@ -29,19 +29,19 @@ class ProveedoresController extends Controller
 
         if( FormatValidation::isValidString($request['txtNombreComercial'])) {
 
-            $proveedor = new Proveedores();
-            $proveedor->nombre_comercial    = FormatValidation::getValidString($request['txtNombreComercial']);
-            $proveedor->telefono            = FormatValidation::getValidString($request['txtTelefono']);
-            $proveedor->domicilio           = FormatValidation::getValidString($request['txtDomicilio']);
-            $proveedor->ciudad              = FormatValidation::getValidString($request['txtCiudad']);
-            $proveedor->estado              = FormatValidation::getValidString($request['txtEstado']);
+            $objProveedor = new Proveedores();
+            $objProveedor->nombre_comercial    = FormatValidation::getValidString($request['txtNombreComercial']);
+            $objProveedor->telefono            = FormatValidation::getValidString($request['txtTelefono']);
+            $objProveedor->domicilio           = FormatValidation::getValidString($request['txtDomicilio']);
+            $objProveedor->ciudad              = FormatValidation::getValidString($request['txtCiudad']);
+            $objProveedor->estado              = FormatValidation::getValidString($request['txtEstado']);
             
-            $proveedor->contacto_nombre     = FormatValidation::getValidString($request['txtContacto']);
-            $proveedor->contacto_telefono   = FormatValidation::getValidString($request['txtContactoTelefono']);
-            $proveedor->contacto_correo     = FormatValidation::getValidString($request['txtContactoCorreo']);
+            $objProveedor->contacto_nombre     = FormatValidation::getValidString($request['txtContacto']);
+            $objProveedor->contacto_telefono   = FormatValidation::getValidString($request['txtContactoTelefono']);
+            $objProveedor->contacto_correo     = FormatValidation::getValidString($request['txtContactoCorreo']);
 
             try {
-                if($proveedor->create()) {
+                if($objProveedor->create()) {
                     $objBitacora = new UsuariosBitacoras();
                     $objBitacora->descripcion   = "Registró un nuevo proveedor: ".$objProveedor->nombre_comercial;
                     $objBitacora->create();

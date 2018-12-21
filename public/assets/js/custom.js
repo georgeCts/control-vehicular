@@ -224,6 +224,81 @@ function borrarDocVeh(pkVehiculoDocumento, token) {
     });
 }
 
+//CARGAR DOCUMENTO DEL VEHÍCULO
+function subirFotoVeh(pkVehiculo, token) 
+{
+    $('#vehiculoFotografiaForm').submit(function(event) {
+        event.preventDefault();
+    })
+
+    var enlace = "/panel/vehiculos/subir_foto_veh";
+    var txtTitulo = $("#txtTitulo").val() == '' ? 'Sin Nombre' : $("#txtTitulo").val();
+    var msgExito = '<div class="alert alert-success"><button data-dismiss="alert" class="close" type="button">×</button><strong>¡Documento cargado!</strong></div>';
+
+    formData = new FormData();
+    if($('#image').prop('files').length > 0)
+    {
+        file = $('#image').prop('files')[0];
+        formData.append("pkVehiculo", pkVehiculo);
+        formData.append("txtTitulo", txtTitulo);
+        formData.append("txtDescripcion", $("#txtDescripcion").val());
+        formData.append("_token", token);
+        formData.append("file", file);
+
+        $.ajax({
+            url: enlace,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            success: function(result) {
+                if(result.response) {
+                    $("#load-foto-msg").html(msgExito);                    
+                    $("#txtTituloF").val("");
+                    $("#txtDescripcionF").val("");
+
+                    $('.image-container').append(`
+                        <div class="col-lg-3 text-center item-foto-${result.pk_vehiculo_fotografia}">
+                            <a href="https://s3.amazonaws.com/control-vehicular/${result.url_fotografia}" target="_blank">
+                                <img height="250px" class="img-thumbnail img-fluid" src="https://s3.amazonaws.com/control-vehicular/${result.url_fotografia}" />
+                            </a>
+                            <button class="btn btn-danger" onclick="borrarFotoVeh(${result.pk_vehiculo_fotografia}, '${token}')">Eliminar</button>
+                        </div>
+                    `);                    
+                }
+           } 
+        }).fail(function() {
+            swal("¡Error!", "La acción deseada no ha podido completarse. Intenta nuevamente", "error");
+        });
+    }
+}
+
+//ELIMINAR FOTOGRAFIA DEL VEHICULO
+function borrarFotoVeh(pkVehiculoFotografia, token) {
+
+    var enlace = "/panel/vehiculos/borrar_foto_veh/" + pkVehiculoFotografia;
+
+    $.ajax({
+        url: enlace,
+        type: "GET",
+        dataType: "json",
+        success: function(result) {
+            if(result) {
+                $('.item-foto-' + pkVehiculoFotografia).remove();
+                
+                swal({
+                    title: "¡Realizado!",
+                    text: "La acción deseada se ha realizado con éxito.",
+                    type: "success",
+                });
+            }
+       } 
+    }).fail(function() {
+        swal("¡Error!", "La acción deseada no ha podido completarse. Intenta nuevamente", "error");
+    });
+}
+
 //ACCIÓN DE CONFIGURACIÓN
 function confAccion(urlAccion, urlGo, msg) 
 {

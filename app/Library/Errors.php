@@ -245,23 +245,51 @@ class Errors {
 	const INSPECCIONES_CREATE_03_MESSAGE = "La inspecci+on no se pudo registrar. Póngase en contacto con el administrador.";
 
 	//VEHICULOS COMPRA
-	const VEHICULOS_COMPRA_EDIT_01_ID = "5_0006";
+	const VEHICULOS_COMPRA_EDIT_01_ID = "12_0001";
 	const VEHICULOS_COMPRA_EDIT_01_TITLE = "Error de modificación.";
 	const VEHICULOS_COMPRA_EDIT_01_MESSAGE = "No se pudo encontrar el registro de compra. Verifique la información.";
 
-	const VEHICULOS_COMPRA_EDIT_02_ID = "5_0007";
+	const VEHICULOS_COMPRA_EDIT_02_ID = "12_0002";
 	const VEHICULOS_COMPRA_EDIT_02_TITLE = "Error de modificación.";
 	const VEHICULOS_COMPRA_EDIT_02_MESSAGE = "Los datos de compra del vehículo no pudieron modificarse. Verifique la información.";
 
 	//VEHICULOS CREDITO
-	const VEHICULOS_CREDITO_EDIT_01_ID = "5_0006";
+	const VEHICULOS_CREDITO_EDIT_01_ID = "13_0001";
 	const VEHICULOS_CREDITO_EDIT_01_TITLE = "Error de modificación.";
 	const VEHICULOS_CREDITO_EDIT_01_MESSAGE = "No se pudo encontrar el registro de crédito. Verifique la información.";
 
-	const VEHICULOS_CREDITO_EDIT_02_ID = "5_0007";
+	const VEHICULOS_CREDITO_EDIT_02_ID = "13_0002";
 	const VEHICULOS_CREDITO_EDIT_02_TITLE = "Error de modificación.";
 	const VEHICULOS_CREDITO_EDIT_02_MESSAGE = "Los datos de crédito del vehículo no pudieron modificarse. Verifique la información.";
 	
+	//RECORDATORIOS
+	const RECORDATORIOS_CREATE_01_ID = "14_0001";
+	const RECORDATORIOS_CREATE_01_TITLE = "Error de nuevo registro.";
+	const RECORDATORIOS_CREATE_01_MESSAGE = "No se ingresaron correctamente los campos requeridos (*).";
+
+	const RECORDATORIOS_CREATE_02_ID = "14_0002";
+	const RECORDATORIOS_CREATE_02_TITLE = "Error de nuevo registro.";
+	const RECORDATORIOS_CREATE_02_MESSAGE = "Los datos del recordatorio no pudieron registrarse. Verifique la información.";
+
+	const RECORDATORIOS_CREATE_03_ID = "14_0002";
+	const RECORDATORIOS_CREATE_03_TITLE = "Error de nuevo registro.";
+	const RECORDATORIOS_CREATE_03_MESSAGE = "El correo del recordatorio no se pudo enviar, verifica que los correos de los usuarios sean válidos.";
+
+	const RECORDATORIOS_EDIT_01_ID = "14_0003";
+	const RECORDATORIOS_EDIT_01_TITLE = "Error de modificación.";
+	const RECORDATORIOS_EDIT_01_MESSAGE = "No se encontró el recordatorio a modificar. Verifique la información.";
+
+	const RECORDATORIOS_EDIT_02_ID = "14_0004";
+	const RECORDATORIOS_EDIT_02_TITLE = "Error de modificación.";
+	const RECORDATORIOS_EDIT_02_MESSAGE = "No se ingresaron correctamente los campos requeridos (*).";
+
+	const RECORDATORIOS_EDIT_03_ID = "14_0005";
+	const RECORDATORIOS_EDIT_03_TITLE = "Error de modificación.";
+	const RECORDATORIOS_EDIT_03_MESSAGE = "Los datos del recordatorio no pudieron registrarse. Verifique la información.";
+
+	const RECORDATORIOS_EDIT_04_ID = "14_0006";
+	const RECORDATORIOS_EDIT_04_TITLE = "Error de envío.";
+	const RECORDATORIOS_EDIT_04_MESSAGE = "El correo del recordatorio no se pudo enviar, verifica que los correos de los usuarios sean válidos.";
 }
 
 ?>

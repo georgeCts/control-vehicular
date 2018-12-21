@@ -67,6 +67,10 @@ Route::group([  'prefix'    => 'panel',
     Route::post('/vehiculos/subir_doc_veh', 'VehiculosController@uploadDocumento');
     Route::get('/vehiculos/borrar_doc_veh/{pkVehiculoDocumento}', 'VehiculosController@deleteDocumento');
 
+    //FOTOGRAFÍAS DE VEHICULO
+    Route::post('/vehiculos/subir_foto_veh', 'VehiculosController@uploadFotografia');
+    Route::get('/vehiculos/borrar_foto_veh/{pkVehiculoFotografia}', 'VehiculosController@deleteFotografia');
+
     //TIPOS DE VEHICULOS
     Route::get('/vehiculos/tipos', 'VehiculosTiposController@index');
     Route::get('/vehiculos/agregar_tipo', 'VehiculosTiposController@registro');
@@ -112,4 +116,12 @@ Route::group([  'prefix'    => 'panel',
     Route::get('/vehiculos/inspecciones/subir_fotos/{pkInspeccion}', 'InspeccionesController@showPhotos');
     Route::post('/vehiculos/subir_foto_ins', 'InspeccionesController@upload');
     Route::get('/vehiculos/eliminar_foto_ins/{pkFichero}', 'InspeccionesController@deletePhoto');
+
+    //RECORDATORIOS
+    Route::get('/vehiculos/recordatorios', 'RecordatoriosController@index');
+    Route::get('/vehiculos/agregar_recordatorio', 'RecordatoriosController@registro');
+    Route::post('/vehiculos/agregar_recordatorio', ['as' => 'new-recordatorio', 'uses' => 'RecordatoriosController@store']);
+
+    Route::get('/vehiculos/editar_recordatorio/{pkRecordatorio}', 'RecordatoriosController@editar');
+    Route::put('/vehiculos/editar_recordatorio', ['as' => 'update-recordatorio', 'uses' => 'RecordatoriosController@update']);
 });

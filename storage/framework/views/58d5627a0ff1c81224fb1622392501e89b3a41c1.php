@@ -10,7 +10,6 @@
 <?php $__env->startSection('content'); ?>
     <div id="users" class="col-md-12 padding-0">
         <?php $__currentLoopData = $objUsuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            
             <usuario-card :user="<?php echo e($item); ?>" :tipo="<?php echo e($item->usuarioTipo); ?>"></usuario-card>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>

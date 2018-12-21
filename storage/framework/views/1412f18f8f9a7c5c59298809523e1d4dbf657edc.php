@@ -396,6 +396,98 @@
                     </div>
                     <!-- FIN CONTENIDO INCIDENTES -->
 
+                    <!-- CONTENIDO DE INCIDENTES -->
+                    <div class="tab-pane" id="recordatorio">
+                        <div class="panel panel-default padding-20">
+                            <div class="panel-heading">
+                                <h4>LISTADO DE RECORDATORIOS</h4>
+                            </div>
+                    
+                            <div class="panel-body">
+                                <div class="responsive-table">
+                                    <table id="dtRecordatorios" class="table table-striped" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ID</th>                                
+                                                <th class="text-left">Veh&iacute;culo</th>
+                                                <th class="text-left">Nombre</th>
+                                                <th class="text-left">Descripci&oacute;n</th>
+                                                <th class="text-left">Fechas</th>
+                                                <th class="text-center">Notificaciones</th>
+                                                <th class="text-center">Creado por:</th>
+                                                <th class="text-center">Acci&oacute;nes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $__currentLoopData = $lstRecordatorios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td class="text-center"><?php echo e($item->pk_recordatorio); ?></td>
+                                                    <td class="text-left">
+                                                        <a href="/panel/vehiculos/perfil_veh/<?php echo e($item->vehiculo->pk_vehiculo); ?>"><?php echo e($item->vehiculo->vehiculo_nombre); ?></a>
+                                                    </td>
+                                                    <td class="text-left"><?php echo e($item->nombre); ?></td>
+                                                    <td class="text-left"><?php echo e($item->descripcion); ?></td>
+                                                    <td class="text-left">
+                                                        <small>Recordatorio: <strong><?php echo e($item->fecha_notificacion); ?></strong></small>
+                                                        <br />
+                                                        <small>Vencimiento: <strong><?php echo e($item->fecha_vencimiento); ?></strong></small>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?php if(sizeof($item->notificados) > 0): ?>
+                                                            <span 
+                                                                class="badge badge-success ttip" 
+                                                                data-toggle="tooltip" 
+                                                                data-placement="bottom"
+                                                                <?php
+                                                                    $html = 'title="';
+                                                                    foreach($item->notificados as $notificado) {
+                                                                        $html .= $notificado->usuario->correo.'&#010;';
+                                                                    }
+                                                                    $html .= '"';
+                
+                                                                    echo $html;
+                                                                ?>>
+                                                                <?php echo e(sizeof($item->notificados)); ?>
+
+                                                            </span> usuario(s)
+                                                        <?php else: ?>
+                                                            <span class="badge badge-danger">0</span> usuario(s)
+                                                        <?php endif; ?>
+                                                    </td>                                  
+                                                    <td class="text-center"><?php echo e($item->creacionUsuario->nombre); ?> <?php echo e($item->creacionUsuario->apellido_paterno); ?></td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group" role="group">
+                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <span class="fa fa-cog"></span>
+                                                                <span class="fa fa-angle-down"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                            <li><a href="/panel/vehiculos/editar_recordatorio/<?php echo e($item->pk_recordatorio); ?>"><i class="fa fa-pencil"></i> Editar</a></li>
+                                                            <li><a href="#"><i class="fa fa-trash"></i> Eliminar</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th class="text-center">ID</th>                                
+                                                <th class="text-left">Veh&iacute;culo</th>
+                                                <th class="text-left">Nombre</th>
+                                                <th class="text-left">Descripci&oacute;n</th>
+                                                <th class="text-left">Fechas</th>
+                                                <th class="text-center">Notificaciones</th>
+                                                <th class="text-center">Creado por:</th>
+                                                <th class="text-center">Acci&oacute;nes</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- CONTENIDO DE DOCUMENTOS -->
                     <div class="tab-pane fade" id="documento">
                         <div class="row">
@@ -486,6 +578,63 @@
                     </div>
                     <!-- FIN CONTENIDO DOCUMENTOS -->
 
+                    <!-- CONTENIDO DE FOTOGRAFÍAS -->
+                    <div class="tab-pane fade" id="fotografia">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="panel panel-default padding-20">
+                                    <div class="panel-heading">
+                                        <h4>FOTOGRAF&Iacute;AS</h4>
+                                    </div>
+                        
+                                    <div class="panel-body">                                
+                                        <div class="row image-container">
+                                            <?php $__currentLoopData = $lstFotografias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="col-lg-3 text-center item-foto-<?php echo e($item->pk_vehiculo_fotografia); ?>">
+                                                    <a href="<?php echo e(Storage::disk('s3')->url($item->url_fotografia)); ?>" target="_blank">
+                                                        <img height="250px" class="img-thumbnail img-fluid" src="<?php echo e(Storage::disk('s3')->url($item->url_fotografia)); ?>" />
+                                                    </a>
+                                                    <button class="btn btn-danger" onclick="borrarFotoVeh(<?php echo e($item->pk_vehiculo_fotografia); ?>, '<?php echo e(csrf_token()); ?>')">Eliminar</button>
+                                                </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="panel panel-primary padding-20">
+                                    <div class="panel-heading">
+                                        <h4 class="text-white">CARGAR FOTOGRAFÍA</h4>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <form id="vehiculoFotografiaForm">
+                                            <div class="row form-group">
+                                                <div id="load-foto-msg"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="text" name="txtTitulo" id="txtTituloF" class="form-control" placeholder="Nombre" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <textarea name="txtDescripcion" id="txtDescripcionF" class="form-control" placeholder="Descripción"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="file" name="image" id="image" accept="image/*" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-danger" onclick="subirFotoVeh(<?php echo e($objVehiculo->pk_vehiculo); ?>, '<?php echo e(csrf_token()); ?>')"> Subir Fotografía</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIN CONTENIDO FOTOGRAFÍAS -->
                 </div>                
             </div>
         </div>
@@ -499,6 +648,7 @@
     $(document).ready(function(){
         $('#dtIncidentes').DataTable();
         $('#dtDocumentos').DataTable();
+        $('#dtRecordatorios').DataTable();
         $('.ttip').tooltip();
     });
 </script>

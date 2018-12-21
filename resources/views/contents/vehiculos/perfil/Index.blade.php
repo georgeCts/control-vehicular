@@ -7,7 +7,7 @@
 @section('panel')
     <div class="col-md-6">
         <h3 class="animated fadeInLeft">
-            <span class="fa-truck fa"></span> Vehículos              
+            <span class="fa-truck fa"></span> Vehículos
         </h3>
         <h5 style="margin-left: 15px;">
             <span clas="text-muted">
@@ -37,7 +37,7 @@
     </div>
 
     <div class="col-md-12 padding-20">
-        <div class="panel panel-default">            
+        <div class="panel panel-default">
             <div class="panel-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="active">
@@ -68,7 +68,7 @@
                         <a data-toggle="tab" href="#fotografia">Fotografías</a>
                     </li>
                 </ul>
-    
+
                 <div class="tab-content" id="myTabContent">
                     <!-- CONTENIDO DE INFORMACION -->
                     <div class="tab-pane fade in active" id="informacion">
@@ -171,7 +171,7 @@
                                                 <h4>DETALLES DE COMPRA</h4>
                                             </div>
 
-                                            <div class="col-sm-6 pull-right">                                                
+                                            <div class="col-sm-6 pull-right">
                                                 <a href="/panel/vehiculos/dat_compra/{{$objVehiculo->pk_vehiculo}}" class="btn btn-dark pull-right"> Actualizar</a>
                                             </div>
                                         </div>
@@ -223,7 +223,7 @@
                                                 <h4>DETALLES DE CR&Eacute;DITO</h4>
                                             </div>
 
-                                            <div class="col-sm-6 pull-right">                                                
+                                            <div class="col-sm-6 pull-right">
                                                 <a href="/panel/vehiculos/dat_credito/{{$objVehiculo->pk_vehiculo}}" class="btn btn-dark pull-right"> Actualizar</a>
                                             </div>
                                         </div>
@@ -277,14 +277,14 @@
                         </div>
                     </div>
                     <!-- FIN CONTENIDO INFORMACION -->
-    
+
                     <!-- CONTENIDO DE INCIDENTES -->
                     <div class="tab-pane fade" id="incidente">
                         <div class="panel panel-default padding-20">
                             <div class="panel-heading">
                                 <h4>INCIDENTES REPORTADOS</h4>
                             </div>
-                
+
                             <div class="panel-body">
                                 <div class="responsive-table">
                                     <table id="dtIncidentes" class="table table-striped" width="100%" cellspacing="0">
@@ -319,13 +319,13 @@
                                                             <span class="label label-warning">{{$item->descripcion}}</span>
                                                         @else
                                                             <span class="label label-danger">{{$item->descripcion}}</span>
-                                                        @endif                                                                                                                        
+                                                        @endif
                                                         <br />
                                                         <br />
                                                         <span data-toggle="tooltip" data-placement="bottom" class="ttip label label-primary" title="{{$item->descripcion_detallada}}"> Ver detalles </span>
                                                         <br />
                                                         <small>Odómetro: <strong>{{$item->medicion}}</strong></small>
-                                                    </td>                                    
+                                                    </td>
                                                     <td class="text-center">{{$item->creacionUsuario->nombre}} {{ $item->creacionUsuario->apellido_paterno}}</td>
                                                     <td class="text-left">
                                                         <span class="label label-{{(($item->estatus != 'PENDIENTE')?'primary':'warning')}}">{{$item->estatus}}</span>
@@ -376,9 +376,100 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>                                        
+                        </div>
                     </div>
                     <!-- FIN CONTENIDO INCIDENTES -->
+
+                    <!-- CONTENIDO DE INCIDENTES -->
+                    <div class="tab-pane" id="recordatorio">
+                        <div class="panel panel-default padding-20">
+                            <div class="panel-heading">
+                                <h4>LISTADO DE RECORDATORIOS</h4>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="responsive-table">
+                                    <table id="dtRecordatorios" class="table table-striped" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-left">Veh&iacute;culo</th>
+                                                <th class="text-left">Nombre</th>
+                                                <th class="text-left">Descripci&oacute;n</th>
+                                                <th class="text-left">Fechas</th>
+                                                <th class="text-center">Notificaciones</th>
+                                                <th class="text-center">Creado por:</th>
+                                                <th class="text-center">Acci&oacute;nes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($lstRecordatorios as $item)
+                                                <tr>
+                                                    <td class="text-center">{{ $item->pk_recordatorio }}</td>
+                                                    <td class="text-left">
+                                                        <a href="/panel/vehiculos/perfil_veh/{{$item->vehiculo->pk_vehiculo}}">{{ $item->vehiculo->vehiculo_nombre  }}</a>
+                                                    </td>
+                                                    <td class="text-left">{{ $item->nombre}}</td>
+                                                    <td class="text-left">{{ $item->descripcion}}</td>
+                                                    <td class="text-left">
+                                                        <small>Recordatorio: <strong>{{$item->fecha_notificacion}}</strong></small>
+                                                        <br />
+                                                        <small>Vencimiento: <strong>{{$item->fecha_vencimiento}}</strong></small>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if(sizeof($item->notificados) > 0)
+                                                            <span
+                                                                class="badge badge-success ttip"
+                                                                data-toggle="tooltip"
+                                                                data-placement="bottom"
+                                                                @php
+                                                                    $html = 'title="';
+                                                                    foreach($item->notificados as $notificado) {
+                                                                        $html .= $notificado->usuario->correo.'&#010;';
+                                                                    }
+                                                                    $html .= '"';
+
+                                                                    echo $html;
+                                                                @endphp>
+                                                                {{sizeof($item->notificados)}}
+                                                            </span> usuario(s)
+                                                        @else
+                                                            <span class="badge badge-danger">0</span> usuario(s)
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">{{$item->creacionUsuario->nombre}} {{ $item->creacionUsuario->apellido_paterno}}</td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group" role="group">
+                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <span class="fa fa-cog"></span>
+                                                                <span class="fa fa-angle-down"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                            <li><a href="/panel/vehiculos/editar_recordatorio/{{$item->pk_recordatorio}}"><i class="fa fa-pencil"></i> Editar</a></li>
+                                                            <li><a href="#"><i class="fa fa-trash"></i> Eliminar</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-left">Veh&iacute;culo</th>
+                                                <th class="text-left">Nombre</th>
+                                                <th class="text-left">Descripci&oacute;n</th>
+                                                <th class="text-left">Fechas</th>
+                                                <th class="text-center">Notificaciones</th>
+                                                <th class="text-center">Creado por:</th>
+                                                <th class="text-center">Acci&oacute;nes</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- CONTENIDO DE DOCUMENTOS -->
                     <div class="tab-pane fade" id="documento">
@@ -388,8 +479,8 @@
                                     <div class="panel-heading">
                                         <h4>DOCUMENTOS</h4>
                                     </div>
-                        
-                                    <div class="panel-body">                                
+
+                                    <div class="panel-body">
                                         <div class="responsive-table">
                                             <table id="dtDocumentos" class="table table-striped" width="100%" cellspacing="0">
                                                 <thead>
@@ -433,7 +524,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div>   
+                                </div>
                             </div>
 
                             <div class="col-md-4">
@@ -470,7 +561,64 @@
                     </div>
                     <!-- FIN CONTENIDO DOCUMENTOS -->
 
-                </div>                
+                    <!-- CONTENIDO DE FOTOGRAFÍAS -->
+                    <div class="tab-pane fade" id="fotografia">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="panel panel-default padding-20">
+                                    <div class="panel-heading">
+                                        <h4>FOTOGRAF&Iacute;AS</h4>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="row image-container">
+                                            @foreach($lstFotografias as $item)
+                                            <div class="col-lg-3 text-center item-foto-{{$item->pk_vehiculo_fotografia}}">
+                                                    <a href="{{ Storage::disk('s3')->url($item->url_fotografia) }}" target="_blank">
+                                                        <img height="250px" class="img-thumbnail img-fluid" src="{{ Storage::disk('s3')->url($item->url_fotografia) }}" />
+                                                    </a>
+                                                    <button class="btn btn-danger" onclick="borrarFotoVeh({{$item->pk_vehiculo_fotografia}}, '{{csrf_token()}}')">Eliminar</button>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="panel panel-primary padding-20">
+                                    <div class="panel-heading">
+                                        <h4 class="text-white">CARGAR FOTOGRAFÍA</h4>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <form id="vehiculoFotografiaForm">
+                                            <div class="row form-group">
+                                                <div id="load-foto-msg"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="text" name="txtTitulo" id="txtTituloF" class="form-control" placeholder="Nombre" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <textarea name="txtDescripcion" id="txtDescripcionF" class="form-control" placeholder="Descripción"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="file" name="image" id="image" accept="image/*" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-danger" onclick="subirFotoVeh({{$objVehiculo->pk_vehiculo}}, '{{csrf_token()}}')"> Subir Fotografía</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIN CONTENIDO FOTOGRAFÍAS -->
+                </div>
             </div>
         </div>
     </div>
@@ -483,6 +631,7 @@
     $(document).ready(function(){
         $('#dtIncidentes').DataTable();
         $('#dtDocumentos').DataTable();
+        $('#dtRecordatorios').DataTable();
         $('.ttip').tooltip();
     });
 </script>

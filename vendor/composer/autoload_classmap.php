@@ -62,6 +62,8 @@ return array(
     'App\\UsuariosPrivilegios' => $baseDir . '/app/UsuariosPrivilegios.php',
     'App\\UsuariosTipos' => $baseDir . '/app/UsuariosTipos.php',
     'App\\Vehiculos' => $baseDir . '/app/Vehiculos.php',
+    'App\\VehiculosDocumentos' => $baseDir . '/app/VehiculosDocumentos.php',
+    'App\\VehiculosFotografias' => $baseDir . '/app/VehiculosFotografias.php',
     'App\\VehiculosGrupos' => $baseDir . '/app/VehiculosGrupos.php',
     'App\\VehiculosInfCompra' => $baseDir . '/app/VehiculosInfCompra.php',
     'App\\VehiculosInfCredito' => $baseDir . '/app/VehiculosInfCredito.php',
