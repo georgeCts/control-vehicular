@@ -6,7 +6,7 @@ class Errors {
 
 
 	public static function getErrors($error_ID) {
-		
+
 		$return = array(	"title"		=> "Error de base de datos.",
 							"message"	=> "Existe un problema de base de datos, pongase en contacto con el administrador del sistema. Error No. " . $error_ID);
 		switch($error_ID) {
@@ -21,18 +21,18 @@ class Errors {
 
 	//LOGIN
 	const LOGIN_01_ID = "1_0001";
-	const LOGIN_01_TITLE = "Acceso restringido."; 
+	const LOGIN_01_TITLE = "Acceso restringido.";
 	const LOGIN_01_MESSAGE = "Correo o password incorrectos. Verifique su información.";
 
 	//SESSIONS
 	const SESION_01_ID = "2_0001";
-	const SESION_01_TITLE = "La sesión ha expirado."; 
+	const SESION_01_TITLE = "La sesión ha expirado.";
 	const SESION_01_MESSAGE = "La sesión del usuario ha finalizado, debe iniciar sesión nuevamente.";
 
 
 	/* *********************************************************************
 	 * *************	ERRORES DE LA INTERFAZ DEL PANEL ************
-	 * ****************************************************************** */		
+	 * ****************************************************************** */
 
 
 	// PROVEEDORES
@@ -261,7 +261,7 @@ class Errors {
 	const VEHICULOS_CREDITO_EDIT_02_ID = "13_0002";
 	const VEHICULOS_CREDITO_EDIT_02_TITLE = "Error de modificación.";
 	const VEHICULOS_CREDITO_EDIT_02_MESSAGE = "Los datos de crédito del vehículo no pudieron modificarse. Verifique la información.";
-	
+
 	//RECORDATORIOS
 	const RECORDATORIOS_CREATE_01_ID = "14_0001";
 	const RECORDATORIOS_CREATE_01_TITLE = "Error de nuevo registro.";
@@ -290,6 +290,27 @@ class Errors {
 	const RECORDATORIOS_EDIT_04_ID = "14_0006";
 	const RECORDATORIOS_EDIT_04_TITLE = "Error de envío.";
 	const RECORDATORIOS_EDIT_04_MESSAGE = "El correo del recordatorio no se pudo enviar, verifica que los correos de los usuarios sean válidos.";
+
+	//SERVICIOS
+	const SERVICIOS_CREATE_01_ID = "15_0001";
+	const SERVICIOS_CREATE_01_TITLE = "Error de nuevo registro.";
+	const SERVICIOS_CREATE_01_MESSAGE = "No se ingresaron correctamente los campos requeridos (*).";
+
+	const SERVICIOS_CREATE_02_ID = "15_0002";
+	const SERVICIOS_CREATE_02_TITLE = "Error de nuevo registro.";
+	const SERVICIOS_CREATE_02_MESSAGE = "Los datos del servicio no pudieron registrarse. Verifique la información.";
+
+	const SERVICIOS_EDIT_01_ID = "15_0003";
+	const SERVICIOS_EDIT_01_TITLE = "Error de nuevo registro.";
+	const SERVICIOS_EDIT_01_MESSAGE = "No se encontró el servicio a modificar. Verifique la información.";
+
+	const SERVICIOS_EDIT_02_ID = "15_0004";
+	const SERVICIOS_EDIT_02_TITLE = "Error de modificación.";
+	const SERVICIOS_EDIT_02_MESSAGE = "No se ingresaron correctamente los campos requeridos (*).";
+
+	const SERVICIOS_EDIT_03_ID = "15_0005";
+	const SERVICIOS_EDIT_03_TITLE = "Error de modificación.";
+	const SERVICIOS_EDIT_03_MESSAGE = "Los datos del servicio no pudieron modificarse. Verifique la información.";
 }
 
 ?>

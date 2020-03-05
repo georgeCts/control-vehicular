@@ -8,7 +8,7 @@
 @section('panel')
     <div class="col-md-6">
         <h3 class="animated fadeInLeft">
-            <span class="fa-truck fa"></span> Vehículos              
+            <span class="fa-truck fa"></span> Vehículos
         </h3>
         <h5 style="margin-left: 15px;">
             <span clas="text-muted">
@@ -50,7 +50,7 @@
                             <label for="txtVehiculo">Veh&iacute;culo *</label>
                             <input type="hidden" name="pk_vehiculo" value="{{$objVehiculo->pk_vehiculo}}" />
                             <input id="txtVehiculo" type="text" class="form-control" value="{{$objVehiculo->vehiculo_nombre}}" readonly />
-                        </div>                        
+                        </div>
                     </div>
 
                     <div class="row form-group">
@@ -72,7 +72,7 @@
                             <input id="txtPlacas" type="text" class="form-control" value="{{$objVehiculo->vehiculo_placa}}" readonly />
                         </div>
                     </div>
-                    
+
                     <div class="row form-group">
                         <div class="col-md-4">
                             <label for="cmbOperador">Operador *</label>
@@ -239,7 +239,7 @@
                                             <tbody class="tbl-niveles">
                                                 <tr>
                                                     <td class="text-left">Nivel de combustible (Lleno, 3/4, 1/2, 1/4, E)</td>
-                                                    <td class="text-center" colspan="2"><input type="text" name="txtTanque" required></td>                                           
+                                                    <td class="text-center" colspan="2"><input type="text" name="txtTanque" required></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Nivel del anticongelante</td>
@@ -330,7 +330,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
 
@@ -359,7 +359,7 @@
                             <a id="btnGenerar" href="javascript:void(0)" class="btn btn-success">Generar Imagen</a>
                         </div>
                     </div>
-                    
+
                     <br />
                     <div class="row form-group">
                         <div class="col-md-6">
@@ -433,19 +433,19 @@
 
             // FORM SUBMIT
 			$('#inspeccionForm').submit(function(e){
-				
+
 				var flag = true;
-				
+
 				if($('#imgRecibo').val() != "" && $('#imgEntrega').val() != "" && $('#cmbOperador').val() != "") {
 					flag = false
 				}
 
-				if(flag) {									
+				if(flag) {
 					e.preventDefault();
 					swal("Hey!", "Verifica que el operador este seleccionado y que las firmas sean ingresadas.", "warning");
 				}
 		  	});
-            
+
             $("#dvRecibo").jSignature();
             $("#dvEntrega").jSignature();
 
@@ -477,11 +477,154 @@
             // resize the canvas
             canvas.width = width;
             canvas.height = height;
+            c.strokeStyle = "#5fba7d";
+            c.lineWidth = 10;
 
             var img = document.getElementById("source");
             c.drawImage(img,10,10);
 
-            function draw() {
+            // Set up mouse events for drawing
+            var drawing = false;
+            var mousePos = { x: 0, y: 0 };
+            var lastPos = mousePos;
+
+            canvas.addEventListener("mousedown", function (e) {
+                drawing = true;
+                lastPos = getMousePos(canvas, e);
+            }, false);
+
+            canvas.addEventListener("mouseup", function (e) {
+                drawing = false;
+            }, false);
+
+            canvas.addEventListener("mousemove", function (e) {
+                mousePos = getMousePos(canvas, e);
+            }, false);
+
+            // Get the position of the mouse relative to the canvas
+            function getMousePos(canvasDom, mouseEvent) {
+                var rect = canvasDom.getBoundingClientRect();
+                return {
+                    x: mouseEvent.clientX - rect.left,
+                    y: mouseEvent.clientY - rect.top
+                };
+            }
+
+            // Get a regular interval for drawing to the screen
+            window.requestAnimFrame = (function (callback) {
+                return window.requestAnimationFrame ||
+                        window.webkitRequestAnimationFrame ||
+                        window.mozRequestAnimationFrame ||
+                        window.oRequestAnimationFrame ||
+                        window.msRequestAnimaitonFrame ||
+                        function (callback) {
+                            window.setTimeout(callback, 1000/60);
+                        };
+            })()
+
+            // Draw to the canvas
+            function renderCanvas() {
+                if (drawing) {
+                    c.moveTo(lastPos.x, lastPos.y);
+                    c.lineTo(mousePos.x, mousePos.y);
+                    c.stroke();
+                    lastPos = mousePos;
+                }
+            }
+
+            // Allow for animation
+            (function drawLoop () {
+                requestAnimFrame(drawLoop);
+                renderCanvas();
+            })();
+
+            canvas.addEventListener("touchstart", function(e) {
+                mousePos = getTouchPos(canvas, e);
+                var touch = e.touches[0];
+                var mouseEvent = new MouseEvent("mousedown", {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas.dispatchEvent(mouseEvent);
+            }, false);
+
+            canvas.addEventListener("touchend", function (e) {
+                var mouseEvent = new MouseEvent("mouseup", {});
+                canvas.dispatchEvent(mouseEvent);
+            }, false);
+
+            canvas.addEventListener("touchmove", function (e) {
+                var touch = e.touches[0];
+                var mouseEvent = new MouseEvent("mousemove", {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas.dispatchEvent(mouseEvent);
+            }, false);
+
+            // Get the position of a touch relative to the canvas
+            function getTouchPos(canvasDom, touchEvent) {
+                var rect = canvasDom.getBoundingClientRect();
+                return {
+                    x: touchEvent.touches[0].clientX - rect.left,
+                    y: touchEvent.touches[0].clientY - rect.top
+                };
+            }
+
+            // Prevent scrolling when touching the canvas
+            document.body.addEventListener("touchstart", function (e) {
+                console.log(e.target);
+                if (e.target == "canvas") {
+                    e.preventDefault();
+                }
+            }, false);
+
+            document.body.addEventListener("touchend", function (e) {
+                console.log(e.target);
+                if (e.target == "canvas") {
+                    e.preventDefault();
+                }
+            }, false);
+
+            document.body.addEventListener("touchmove", function (e) {
+                console.log(e.target);
+                if (e.target == "canvas") {
+                    e.preventDefault();
+                }
+            }, false);
+
+            function clearCanvas() {
+                canvas.width = canvas.width;
+                c.strokeStyle = "#5fba7d";
+                c.lineWidth = 10;
+                c.drawImage(img,10,10);
+            }
+
+            /*canvas.addEventListener('touchstart', function(e) {
+                draw(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+                console.log(e.changedTouches[1]);
+                //draw(e.changedTouches[1].pageX, e.changedTouches[1].pageY);
+            });
+
+            canvas.addEventListener('touchmove', function(e) {
+                if(e.target.tagName == "CANVAS") {
+                    e.preventDefault();
+                    draw(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+                }
+                //draw(e.changedTouches[1].pageX, e.changedTouches[1].pageY);
+            });
+
+            draw = function(x, y) {
+                c.beginPath();
+                c.fillStyle = colour;
+                c.arc(x, y, 30, 0, 2 * Math.PI);
+                c.fill();
+                c.closePath();
+            };*/
+
+
+
+            /*function draw() {
                 if (mousedown) {
                     // set the colour
                     c.fillStyle = colour;
@@ -514,7 +657,7 @@
 
             canvas.addEventListener( 'mouseup', function( event ) {
                 mousedown = false;
-            }, false );
+            }, false );*/
 
             $('#btnGenerar').click(function() {
                 var dataURL = canvas.toDataURL('image/jpeg', 1);
@@ -523,8 +666,7 @@
             });
 
             $('#btnLimpiar').click(function() {
-                c.clearRect(0, 0, canvas.width, canvas.height);
-                c.drawImage(img,10,10);
+                clearCanvas();
             });
         });
     </script>

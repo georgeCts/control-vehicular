@@ -18,7 +18,7 @@ class TableIncidentesImportancia extends Migration
 
             $table->increments('pk_incidente_importancia');
             $table->string('incidente_importancia');
-            
+
             $table->boolean('eliminado')->default(0);
         });
 
@@ -30,7 +30,7 @@ class TableIncidentesImportancia extends Migration
         )
             VALUES
         ( 1, 'Crítica', 0),
-        ( 2, 'Moderada', 0), 
+        ( 2, 'Moderada', 0),
         ( 3, 'Baja', 0)");
     }
 

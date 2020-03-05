@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\SendRecordatorios' => $baseDir . '/app/Console/Commands/SendRecordatorios.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\ApplicationException' => $baseDir . '/app/Exceptions/ApplicationException.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -22,6 +23,7 @@ return array(
     'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',
     'App\\Http\\Controllers\\OperadoresController' => $baseDir . '/app/Http/Controllers/OperadoresController.php',
     'App\\Http\\Controllers\\ProveedoresController' => $baseDir . '/app/Http/Controllers/ProveedoresController.php',
+    'App\\Http\\Controllers\\RecordatoriosController' => $baseDir . '/app/Http/Controllers/RecordatoriosController.php',
     'App\\Http\\Controllers\\UsuariosController' => $baseDir . '/app/Http/Controllers/UsuariosController.php',
     'App\\Http\\Controllers\\VehiculosController' => $baseDir . '/app/Http/Controllers/VehiculosController.php',
     'App\\Http\\Controllers\\VehiculosGruposController' => $baseDir . '/app/Http/Controllers/VehiculosGruposController.php',
@@ -47,7 +49,9 @@ return array(
     'App\\Library\\Returns\\AjaxReturn' => $baseDir . '/app/Library/Returns/AjaxReturn.php',
     'App\\Library\\Utils' => $baseDir . '/app/Library/Utils.php',
     'App\\Library\\XMLConverter' => $baseDir . '/app/Library/XMLConverter.php',
+    'App\\Mail\\RecordatorioEmail' => $baseDir . '/app/Mail/RecordatorioEmail.php',
     'App\\Mail\\ReporteIncidenteEmail' => $baseDir . '/app/Mail/ReporteIncidenteEmail.php',
+    'App\\Mantenimientos' => $baseDir . '/app/Mantenimientos.php',
     'App\\Operadores' => $baseDir . '/app/Operadores.php',
     'App\\Privilegios' => $baseDir . '/app/Privilegios.php',
     'App\\PrivilegiosCategorias' => $baseDir . '/app/PrivilegiosCategorias.php',
@@ -57,6 +61,9 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\Recordatorios' => $baseDir . '/app/Recordatorios.php',
+    'App\\RecordatoriosUsuarios' => $baseDir . '/app/RecordatoriosUsuarios.php',
+    'App\\Servicios' => $baseDir . '/app/Servicios.php',
     'App\\Usuarios' => $baseDir . '/app/Usuarios.php',
     'App\\UsuariosBitacoras' => $baseDir . '/app/UsuariosBitacoras.php',
     'App\\UsuariosPrivilegios' => $baseDir . '/app/UsuariosPrivilegios.php',

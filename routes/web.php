@@ -124,4 +124,20 @@ Route::group([  'prefix'    => 'panel',
 
     Route::get('/vehiculos/editar_recordatorio/{pkRecordatorio}', 'RecordatoriosController@editar');
     Route::put('/vehiculos/editar_recordatorio', ['as' => 'update-recordatorio', 'uses' => 'RecordatoriosController@update']);
+
+    //SERVICIOS
+    Route::get('/servicios', 'ServiciosController@index');
+    Route::get('/servicios/agregar', 'ServiciosController@agregar');
+    Route::post('/servicios/agregar', ['as' => 'new-servicio', 'uses' => 'ServiciosController@store']);
+    Route::get('/servicios/editar/{pkServicio}', 'ServiciosController@editar');
+    Route::put('/servicios/editar', ['as' => 'update-servicio', 'uses' => 'ServiciosController@update']);
+
+    //GRUPOS DE MANTENIMIENTO
+    Route::get('/servicios/grupos', 'MantenimientoGruposController@index');
+    Route::get('/servicios/agregar_grupo', 'MantenimientoGruposController@agregar');
+    Route::post('/servicios/agregar_grupo', ['as' => 'new-mantenimiento-grupo', 'uses' => 'MantenimientoGruposController@store']);
+    Route::get('/servicios/editar_grupo/{pkGrupo}', 'MantenimientoGruposController@editar');
+    Route::put('/servicios/editar_grupo', ['as' => 'update-mantenimiento-grupo', 'uses' => 'MantenimientoGruposController@update']);
+
+
 });

@@ -405,6 +405,7 @@ class ComposerStaticInit54ea252ab493ea45a3ac63933ca29a67
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\SendRecordatorios' => __DIR__ . '/../..' . '/app/Console/Commands/SendRecordatorios.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\ApplicationException' => __DIR__ . '/../..' . '/app/Exceptions/ApplicationException.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -421,6 +422,7 @@ class ComposerStaticInit54ea252ab493ea45a3ac63933ca29a67
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\OperadoresController' => __DIR__ . '/../..' . '/app/Http/Controllers/OperadoresController.php',
         'App\\Http\\Controllers\\ProveedoresController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProveedoresController.php',
+        'App\\Http\\Controllers\\RecordatoriosController' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordatoriosController.php',
         'App\\Http\\Controllers\\UsuariosController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsuariosController.php',
         'App\\Http\\Controllers\\VehiculosController' => __DIR__ . '/../..' . '/app/Http/Controllers/VehiculosController.php',
         'App\\Http\\Controllers\\VehiculosGruposController' => __DIR__ . '/../..' . '/app/Http/Controllers/VehiculosGruposController.php',
@@ -446,7 +448,9 @@ class ComposerStaticInit54ea252ab493ea45a3ac63933ca29a67
         'App\\Library\\Returns\\AjaxReturn' => __DIR__ . '/../..' . '/app/Library/Returns/AjaxReturn.php',
         'App\\Library\\Utils' => __DIR__ . '/../..' . '/app/Library/Utils.php',
         'App\\Library\\XMLConverter' => __DIR__ . '/../..' . '/app/Library/XMLConverter.php',
+        'App\\Mail\\RecordatorioEmail' => __DIR__ . '/../..' . '/app/Mail/RecordatorioEmail.php',
         'App\\Mail\\ReporteIncidenteEmail' => __DIR__ . '/../..' . '/app/Mail/ReporteIncidenteEmail.php',
+        'App\\Mantenimientos' => __DIR__ . '/../..' . '/app/Mantenimientos.php',
         'App\\Operadores' => __DIR__ . '/../..' . '/app/Operadores.php',
         'App\\Privilegios' => __DIR__ . '/../..' . '/app/Privilegios.php',
         'App\\PrivilegiosCategorias' => __DIR__ . '/../..' . '/app/PrivilegiosCategorias.php',
@@ -456,6 +460,9 @@ class ComposerStaticInit54ea252ab493ea45a3ac63933ca29a67
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Recordatorios' => __DIR__ . '/../..' . '/app/Recordatorios.php',
+        'App\\RecordatoriosUsuarios' => __DIR__ . '/../..' . '/app/RecordatoriosUsuarios.php',
+        'App\\Servicios' => __DIR__ . '/../..' . '/app/Servicios.php',
         'App\\Usuarios' => __DIR__ . '/../..' . '/app/Usuarios.php',
         'App\\UsuariosBitacoras' => __DIR__ . '/../..' . '/app/UsuariosBitacoras.php',
         'App\\UsuariosPrivilegios' => __DIR__ . '/../..' . '/app/UsuariosPrivilegios.php',

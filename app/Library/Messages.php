@@ -7,7 +7,7 @@ class Messages {
 	//LOGIN PUBLIC
 	const PUBLIC_LOGIN_TITLE = "Acceso a cuenta";
 	const PUBLIC_LOGIN_MESSAGE = "Te has autentificado exitosamente!";
-	
+
 	//USUARIOS
 	const USUARIOS_CREATE_TITLE = "Nuevo usuario creado.";
 	const USUARIOS_CREATE_MESSAGE = "El nuevo usuario se creó exitosamente.";
@@ -93,6 +93,12 @@ class Messages {
 	const RECORDATORIOS_CREATE_MESSAGE = "El nuevo recordatorio se creó exitosamente.";
 	const RECORDATORIOS_EDIT_TITLE = "Recordatorio modificado.";
 	const RECORDATORIOS_EDIT_MESSAGE = "El recordatorio se modificó exitosamente.";
+
+	//SERVICIOS
+	const SERVICIOS_CREATE_TITLE = "Nuevo servicio.";
+	const SERVICIOS_CREATE_MESSAGE = "El nuevo servicio se creó exitosamente.";
+	const SERVICIOS_EDIT_TITLE = "Servicio modificado.";
+	const SERVICIOS_EDIT_MESSAGE = "El servicio se modificó exitosamente.";
 }
 
 ?>
